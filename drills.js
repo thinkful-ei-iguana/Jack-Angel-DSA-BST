@@ -54,15 +54,15 @@ class BinarySearchTree {
 }
 
 function main() {
-  let BST = new BinarySearchTree();
-  BST.insert(3, 3)
-  BST.insert(1, 1)
-  BST.insert(4, 4)
-  BST.insert(6, 6)
-  BST.insert(9, 9)
-  BST.insert(2, 2)
-  BST.insert(5, 5)
-  BST.insert(7, 7)
+  // let BST = new BinarySearchTree();
+  // BST.insert(3, 3)
+  // BST.insert(1, 1)
+  // BST.insert(4, 4)
+  // BST.insert(6, 6)
+  // BST.insert(9, 9)
+  // BST.insert(2, 2)
+  // BST.insert(5, 5)
+  // BST.insert(7, 7)
 
 
 
@@ -85,6 +85,8 @@ function main() {
 
 main()
 
+//drill 4
+//this function returns the sum of the values in the binary tree
 function tree(t) {
   if (!t) {
     return '';
@@ -92,6 +94,7 @@ function tree(t) {
   return tree(t.left) + t.value + tree(t.right)
 }
 
+//drill 5
 function findHeight(tree) {
   if (!tree) {
     return 0;
@@ -106,9 +109,64 @@ function findHeight(tree) {
   return heightRight;
 }
 
+//drill 6
+function isItBsTree(tree) {
+  if(!tree){
+    return false;
+  }
+  if(tree.right) {
+    if(tree.right.key > tree.key) {
+      isItBsTree(tree.right)
+    } else {
+      return false;
+    }
+  }
+  return true;
+}
 
+
+
+  //drill 7
 function find3rdBiggest(input){
   const res = tree(input).split('');
   return res[res.length -3];
 }
 
+//drill 8
+
+let BST = new BinarySearchTree();
+  BST.insert(3, 3)
+  BST.insert(1, 1)
+  BST.insert(4, 4)
+  BST.insert(6, 6)
+  BST.insert(9, 9)
+  BST.insert(2, 2)
+  BST.insert(5, 5)
+  BST.insert(7, 7)
+  
+function shortest(tree) {
+  if(!tree) {
+    return 0;
+  } else {
+    return Math.min(shortest(tree.right), shortest(tree.left)) + 1
+  }
+}
+function longest(tree) {
+  if(!tree) {
+    return 0;
+  } else {
+    return Math.max(longest(tree.right), longest(tree.left)) + 1
+  }
+}
+
+function isBalanced(tree) {
+  let short = shortest(tree)
+  let long = longest(tree)
+
+  if (long- short > 1) {
+    return false;
+  } else {
+    return true;
+  }
+}
+console.log(isBalanced(BST))
