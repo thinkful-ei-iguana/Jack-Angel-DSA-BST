@@ -169,4 +169,40 @@ function isBalanced(tree) {
     return true;
   }
 }
-console.log(isBalanced(BST))
+//console.log(isBalanced(BST))
+
+
+function arrToBSTComp(arr1, arr2){
+  if(arr1.length !== arr2.length || arr1[0] !== arr2[0]){
+    return false;
+  }
+  if(arr1.length === 0){
+    return true;
+  }
+  if(arr1.length === 1){
+    if(arr1[0] === arr2[0]){
+      return true;
+    }
+    return false;
+  }
+  
+  let arr11 = [];
+  let arr12 = [];
+  let arr21  = [];
+  let arr22  = [];
+  for(let i = 1; i < arr1.length; i++){
+    if(arr1[i] > arr1[0]){
+      arr11 = [...arr11, arr1[i]];
+    } else {
+      arr12 = [...arr12, arr1[i]];
+    }
+    if(arr2[i] > arr2[0]){
+      arr21 = [...arr21, arr2[i]];
+    } else {
+      arr22 = [...arr22, arr2[i]];
+    }
+  }
+  return (arrToBSTComp(arr11, arr21) && arrToBSTComp(arr12, arr22));
+}
+
+console.log(arrToBSTComp([3, 5, 4, 6, 1, 0, 2], [3, 1, 5, 2, 4, 6, 0]));
