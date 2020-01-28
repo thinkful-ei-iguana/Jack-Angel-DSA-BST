@@ -11,13 +11,13 @@ class BinarySearchTree {
       this.key = key;
       this.value = value;
     } else if (key < this.key) {
-      if(this.left == null) {
+      if(this.left === null) {
         this.left = new BinarySearchTree(key, value, this)
       } else {
         this.left.insert(key, value)
       }
     } else {
-      if (this.right == null) {
+      if (this.right === null) {
         this.right = new BinarySearchTree(key, value, this)
       } else {
         this.right.insert(key, value)
@@ -25,7 +25,7 @@ class BinarySearchTree {
     }
   }
   remove (key) {
-    if(this.key == key) {
+    if(this.key === key) {
       if(this.left && this.right) {
         const successor = this.right._findMin();
         this.key = successor.key;
@@ -43,7 +43,7 @@ class BinarySearchTree {
     }
   }
   find (key) {
-    if (this.key == key) {
+    if (this.key === key) {
       return this.value;
     } else if(key < this.key && this.left) {
       return this.left.find(key)
@@ -81,10 +81,25 @@ function main () {
   BST.insert('I','I')
   BST.insert('O','O')
   BST.insert('N','N') 
-  // console.log(BST)
-  console.log(tree(BST))
+  //console.log(BST.right.left);
+  //console.log(BST.right.right);
+  console.log(tree(BST));
+  console.log(findHeight(BST));
 }
 
 main()
 
+function findHeight(tree){
+  if(!tree){
+    return 0;
+  }
+
+  const heightLeft = 1 + findHeight(tree.left);
+  const heightRight = 1 + findHeight(tree.right);
+
+  if(heightLeft > heightRight){
+    return heightLeft;
+  }
+  return heightRight;
+}
 
